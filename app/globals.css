@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Цвета для светлой темы (по умолчанию) */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
@@ -24,7 +23,6 @@
   --radius: 0.5rem;
 }
 
-/* Тёмная тема */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: 0 0% 7%;
@@ -56,5 +54,33 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+:root {
+  --header-height: 73px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 65px;
+  }
+}
+
+.hero-section {
+  min-height: calc(100vh - var(--header-height));
+  margin-top: var(--header-height);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
