@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, ReactNode } from "react"
+import { useState, useEffect, useRef, ReactNode } from "react";
 
 interface AnimatedCardProps {
   children: ReactNode;
@@ -19,6 +19,16 @@ export default function Animation({
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // На мобилках — небольшая задержка, но анимация точно сработает
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -26,7 +36,7 @@ export default function Animation({
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "50px" }
+      { threshold: 0.1, rootMargin: "100px" }
     );
 
     if (cardRef.current) {
