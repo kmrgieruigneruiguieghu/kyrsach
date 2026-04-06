@@ -14,8 +14,8 @@ export async function addUser(formData: FormData) {
     return { error: "Заполните имя и email" };
   }
 
-  // const existingUser = await db.select().from(users).where(eq(users.email, email)).get();
-  const existingUser = await db.select().from(users).where(eq(users.email, email));
+  const existingUser = await db.select().from(users).where(eq(users.email, email)).get();
+  // const existingUser = await db.select().from(users).where(eq(users.email, email));
 
   if (existingUser) {
     return { error: "Этот email уже зарегистрирован" };
