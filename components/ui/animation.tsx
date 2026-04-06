@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect, useRef, ReactNode } from "react";
 
@@ -22,10 +22,10 @@ export default function Animation({
     const isMobile = window.innerWidth <= 768;
     
     if (isMobile) {
-      // На мобилках — небольшая задержка, но анимация точно сработает
+      // На мобилках — гарантированное появление с задержкой
       const timer = setTimeout(() => {
         setIsVisible(true);
-      }, 50);
+      }, 150);
       return () => clearTimeout(timer);
     }
 
@@ -36,7 +36,7 @@ export default function Animation({
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "100px" }
+      { threshold: 0.1, rootMargin: "200px" }
     );
 
     if (cardRef.current) {
