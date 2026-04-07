@@ -5,18 +5,11 @@ import { ArrowRight, Star, X, Check } from "lucide-react"
 import Link from "next/link"
 import Carousel from "@/components/ui/carousel"
 import DemoResume from "@/components/ui/demoversion"
-import { carouselItems } from "@/components/ui/dataarray"
+import { carouselItems, typewriterWords } from "@/components/ui/dataarray"
 
 export default function HowItWorksPage() {
   const [text] = useTypewriter({
-    words: [
-      "Автоматизировал рутинные задачи с помощью скриптов, сэкономив команде 15 часов в неделю",
-      "Внедрил code review процесс, повысив качество кода и снизив количество багов на 35%",
-      "Написал техническую документацию для 5 сервисов, ускорив онбординг новых сотрудников на 50%",
-      "Оптимизировал запросы к API, сократив среднее время ответа с 500ms до 100ms",
-      "Настроил мониторинг производительности, выявив и устранив узкие места в архитектуре",
-      "Внедрил автоматическое тестирование в CI/CD, сократив количество критических багов на 45%",
-    ],
+    words: typewriterWords,
     loop: true,
     typeSpeed: 50,
     deleteSpeed: 30,
