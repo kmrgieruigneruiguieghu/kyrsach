@@ -15,8 +15,8 @@ type SortField = "id" | "name" | "email" | "registeredAt";
 type SortOrder = "asc" | "desc";
 
 export default function AdminClient({ users }: { users: User[] }) {
-  const [sortField, setSortField] = useState<SortField>("registeredAt");
-  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [sortField, setSortField] = useState<SortField>("id");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
   const sortedUsers = useMemo(() => {

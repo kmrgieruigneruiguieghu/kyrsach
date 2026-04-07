@@ -7,7 +7,7 @@ interface PageProps {
 
 export default async function AdminPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const adminPassword = process.env.ADMIN_PASSWORD || "aboba2026";
+  const adminPassword = process.env.ADMIN_PASSWORD;
   const userPassword = params.password;
 
   if (!userPassword || userPassword !== adminPassword) {
