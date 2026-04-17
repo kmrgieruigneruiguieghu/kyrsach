@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
-import emailjs from '@emailjs/nodejs'
+import { NextResponse } from "next/server"
+import emailjs from "@emailjs/nodejs"
 
 export async function POST(request: Request) {
   const { name, email } = await request.json();
@@ -9,26 +9,12 @@ export async function POST(request: Request) {
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
   const privateKey = process.env.EMAILJS_PRIVATE_KEY!;
 
-  emailjs.init({
-    publicKey: publicKey,
-    privateKey: privateKey,
-  });
+  emailjs.init({ publicKey, privateKey });
 
   try {
-    const result = await emailjs.send(
-      serviceId,
-      templateId,
-      {
-        name: name,
-        email: email,
-        to_email: email,
-      }
-    );
-
-    console.log('Письмо отправлено:', result);
+    await emailjs.send(serviceId, templateId, { name, email, to_email: email });
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('EmailJS error:', error);
+  } catch {
     return NextResponse.json({ error: 'Ошибка отправки письма' });
   }
 }

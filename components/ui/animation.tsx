@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useRef, ReactNode } from "react";
+import { useState, useEffect, useRef, ReactNode } from "react"
 
 interface AnimatedCardProps {
   children: ReactNode;
@@ -9,9 +9,9 @@ interface AnimatedCardProps {
   direction?: "left" | "right" | "up" | "down";
 }
 
-export default function Animation({ 
-  children, 
-  delay = 0, 
+export default function Animation({
+  children,
+  delay = 0,
   className = "",
   direction = "up"
 }: AnimatedCardProps) {
@@ -19,24 +19,32 @@ export default function Animation({
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
-    
-    if (isMobile) {
-      // На мобилках — гарантированное появление с задержкой
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 150);
-      return () => clearTimeout(timer);
-    }
+    const checkIfVisible = () => {
+      if (cardRef.current) {
+        const rect = cardRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        if (rect.top < windowHeight - 50) {
+          setIsVisible(true);
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (checkIfVisible()) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
       },
-      { threshold: 0.1, rootMargin: "200px" }
+      {
+        threshold: 0.3,
+      }
     );
 
     if (cardRef.current) {
@@ -50,9 +58,9 @@ export default function Animation({
     if (!isVisible) {
       switch (direction) {
         case "left": return "translateX(-120px)";
-        case "right": return "translateX(30px)";
-        case "down": return "translateY(30px)";
-        default: return "translateY(300px)";
+        case "right": return "translateX(120px)";
+        case "down": return "translateY(120px)";
+        default: return "translateY(120px)";
       }
     }
     return "translate(0)";
@@ -62,7 +70,7 @@ export default function Animation({
     <div
       ref={cardRef}
       style={{
-        transition: `all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) ${delay}s`,
+        transition: `all 0.5s ease-out ${delay}s`,
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
       }}

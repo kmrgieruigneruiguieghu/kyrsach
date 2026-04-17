@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import Header from "@/app/header_footer/header"
-import Footer from "@/app/header_footer/footer"
+import Header from "@/components/header_footer/header"
+import Footer from "@/components/header_footer/footer"
 
 export const metadata: Metadata = {
   title: "ProfResume",
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
       </head>
       <body className="bg-[#0A0A0A] text-white antialiased overflow-x-hidden">
         <div 
@@ -27,13 +27,12 @@ export default function RootLayout({
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundAttachment: "fixed",
-          }}
-        />
-        <Header />
+          }}/>
+        <Header/>
         <main className="relative z-10 pt-18.25">
           {children}
         </main>
-        <Footer />
+        <Footer/>
       </body>
     </html>
   );
